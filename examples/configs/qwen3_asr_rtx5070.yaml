@@ -1,4 +1,4 @@
-# Single-GPU starting profile for one RTX 5070 (SM120, 12 GB), scaled down from qwen3_asr_rtx5090.yaml; not yet qualified under issue #1120.
+# Single-GPU profile for one 12 GB RTX 5070 (SM120), qualified for roadmap issue #1120; long audio (> 30 s) admits one request at a time and answers others with HTTP 503.
 config_cls: Qwen3ASRPipelineConfig
 name: qwen3-asr-rtx5070
 model_path: Qwen/Qwen3-ASR-1.7B

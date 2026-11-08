@@ -150,6 +150,16 @@ This profile uses BF16, allows up to 16 running requests, and sets
 [RTX 5090 benchmark report](https://github.com/sgl-project/sglang-omni/issues/1212)
 for results measured on an earlier release.
 
+For a single 12 GB RTX 5070 (SM120), use:
+
+```bash
+sgl-omni serve \
+  --config examples/configs/qwen3_asr_rtx5070.yaml \
+  --port 8000
+```
+
+This profile uses BF16, allows up to 8 running requests, and sets `mem_fraction_static=0.75`, which leaves about 0.7 GB of the card free under sustained load. On the SeedTTS sets it measured 1.20–1.22% corpus WER (EN) and 0.60–0.61% CER (ZH), with about 46 req/s at concurrency 8 and 52 req/s at concurrency 16 on EN. At 8 running requests the default long-audio policy admits one request longer than `max_audio_clip_s` at a time and answers concurrent ones with HTTP 503, so clients sending long audio in parallel should retry.
+
 For example, force synchronous decode when comparing modes:
 
 ```bash
